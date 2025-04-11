@@ -1,0 +1,63 @@
+version: "4.12.0"
+
+services:
+  database:
+    container_name: vial-database
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: vial
+      POSTGRES_PASSWORD: vial
+      POSTGRES_DB: vial
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vial"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  nodeserver:
+    container_name: vial-backend-api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.local
+    command: >
+      bash -c "
+        echo 'Waiting for database to be ready...' &&
+        while ! nc -z database 5432; do
+          sleep 1
+        done &&
+        echo 'Database is ready!' &&
+        npx prisma migrate deploy &&
+        npx prisma db seed &&
+        npm run dev
+      "
+    volumes:
+      - ./backend:/usr/app/backend
+      - /usr/app/backend/node_modules
+    environment:
+      - DATABASE_URL=postgresql://vial:vial@database:5432/vial
+    depends_on:
+      database:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+
+  frontend:
+    container_name: vial-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/.next
+    depends_on:
+      - nodeserver  
+
+volumes:
+  postgres_data:

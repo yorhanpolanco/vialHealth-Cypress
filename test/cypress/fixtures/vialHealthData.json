@@ -1,0 +1,61 @@
+{
+    "tabTitle": "Vial Health",
+    "tableTitle": "Query Management Application",
+    "columns": {
+      "firstColumnTitle": "Question",
+      "secondColumnTitle": "Answer",
+      "thirdColumnTitle": "Queries"
+    },
+    "questions": [
+      {
+        "question": "Do you have any history of chronic diseases, such as diabetes, hypertension, or cardiovascular diseases?",
+        "answer": "No"
+      },
+      {
+        "question": "Are you currently taking any prescription medications?",
+        "answer": "Yes, antihypertensive medication"
+      },
+      {
+        "question": "Have you ever had an allergic reaction to any medications?",
+        "answer": "Yes, I am allergic to penicillin."
+      },
+      {
+        "question": "Do you smoke tobacco or use any nicotine products?",
+        "answer": "No"
+      },
+      {
+        "question": "Do you regularly exercise or engage in physical activity?",
+        "answer": "Yes, I walk for 30 minutes every day."
+      },
+      {
+        "question": "Do you have a family history of cancer?",
+        "answer": "Yes, my mother had breast cancer."
+      },
+      {
+        "question": "Have you ever been hospitalized for any reason?",
+        "answer": "Yes, I was hospitalized for surgery in 2019."
+      },
+      {
+        "question": "Do you have any known food allergies?",
+        "answer": "No"
+      },
+      {
+        "question": "Do you experience any frequent or chronic headaches?",
+        "answer": "No"
+      },
+      {
+        "question": "Do you have any problems with your vision, such as blurred vision or eye strain?",
+        "answer": "Occasionally, I experience eye strain after long periods of screen use."
+      }
+    ],
+    "toolTip": {
+        "noQuery":"Create Query",
+        "open":"Open Query",
+        "resolved":"Resolved Query"
+    },
+    "query": {
+        "shortAnswer": "No",
+        "answerWithNumbers":"123456789"
+    }
+  }
+  

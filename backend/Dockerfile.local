@@ -1,0 +1,25 @@
+# Use the official Node.js image.
+FROM node:18
+
+# Set the working directory
+WORKDIR /usr/app/backend
+
+# Install netcat for database connection checking
+RUN apt-get update && apt-get install -y netcat-openbsd && rm -rf /var/lib/apt/lists/*
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Generate Prisma client
+RUN npx prisma generate
+
+EXPOSE 8080
+
+# Migration will be handled by the docker-compose command
+CMD ["npm", "run", "dev"]
