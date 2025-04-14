@@ -2,7 +2,7 @@
 FROM cypress/included:14.2.1
 
 # Establecer el directorio de trabajo dentro del contenedor
-WORKDIR /e2e
+WORKDIR /usr/test
 
 # Copiar los archivos package.json y package-lock.json al contenedor
 COPY package*.json ./

@@ -9,7 +9,7 @@ export async function CreateQuery(
   error?: string | unknown
 }> {
   try {
-    const response = await fetch('http://127.0.0.1:8080/queries', {
+    const response = await fetch('http://nodeserver:8080/queries', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -43,7 +43,7 @@ export async function resolveQuery(
 }> {
   try {
     const response = await fetch(
-      `http://127.0.0.1:8080/queries/${formDataId}`,
+      `http://nodeserver:8080/queries/${formDataId}`,
       {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -75,7 +75,7 @@ export async function deleteQuery(queryId: string): Promise<{
   error?: string | unknown
 }> {
   try {
-    const response = await fetch(`http://127.0.0.1:8080/queries/${queryId}`, {
+    const response = await fetch(`http://nodeserver:8080/queries/${queryId}`, {
       method: 'DELETE',
     })
 

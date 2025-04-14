@@ -6,7 +6,7 @@ export async function GetFormData(): Promise<{
   error?: string | unknown
 }> {
   try {
-    const response = await fetch('http://127.0.0.1:8080/form-data')
+    const response = await fetch('http://nodeserver:8080/form-data')
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`)
     }

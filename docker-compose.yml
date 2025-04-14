@@ -49,7 +49,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8080
+      - NEXT_PUBLIC_API_URL=http://nodeserver:8080
     ports:
       - 3000:3000
     volumes:
@@ -57,7 +57,23 @@ services:
       - /usr/src/app/node_modules
       - /usr/src/app/.next
     depends_on:
-      - nodeserver  
+      - nodeserver
+
+  cypress:
+    build:
+      context: ./test
+      dockerfile: Dockerfile
+    depends_on:
+      - frontend
+      - nodeserver
+    environment:
+      - CYPRESS_baseUrl=http://frontend:3000
+    volumes:
+      - ./test/cypress:/usr/test/cypress
+      - ./test/cypress.config.js:/usr/test/cypress.config.js
+      - ./test/.env:/usr/test/.env
+    profiles:
+      - test
 
 volumes:
   postgres_data:
