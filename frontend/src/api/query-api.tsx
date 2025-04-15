@@ -8,7 +8,7 @@ export async function CreateQuery(
   data?: IQuery
   error?: string | unknown
 }> {
-  try {
+  try { //run local http://127.0.0.1:8080
     const response = await fetch('http://nodeserver:8080/queries', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -41,7 +41,7 @@ export async function resolveQuery(
   data?: IQuery
   error?: string | unknown
 }> {
-  try {
+  try { //run local http://127.0.0.1:8080
     const response = await fetch(
       `http://nodeserver:8080/queries/${formDataId}`,
       {
@@ -74,7 +74,7 @@ export async function deleteQuery(queryId: string): Promise<{
   message?: string
   error?: string | unknown
 }> {
-  try {
+  try {       //run local http://127.0.0.1:8080
     const response = await fetch(`http://nodeserver:8080/queries/${queryId}`, {
       method: 'DELETE',
     })
