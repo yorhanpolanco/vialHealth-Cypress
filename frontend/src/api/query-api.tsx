@@ -1,6 +1,9 @@
 // api/queries-api.ts
 import { IQuery } from '@/utils/types'
 
+const isDocker = typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+const backendUrl = isDocker ? 'http://nodeserver:8080' : 'http://127.0.0.1:8080'
+
 export async function CreateQuery(
   data: Pick<IQuery, 'title' | 'description' | 'status' | 'formDataId'>
 ): Promise<{
@@ -9,7 +12,7 @@ export async function CreateQuery(
   error?: string | unknown
 }> {
   try { //run local http://127.0.0.1:8080
-    const response = await fetch('http://nodeserver:8080/queries', {
+    const response = await fetch(`${backendUrl}/queries`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
@@ -43,7 +46,7 @@ export async function resolveQuery(
 }> {
   try { //run local http://127.0.0.1:8080
     const response = await fetch(
-      `http://nodeserver:8080/queries/${formDataId}`,
+      `${backendUrl}/queries/${formDataId}`,
       {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -75,7 +78,7 @@ export async function deleteQuery(queryId: string): Promise<{
   error?: string | unknown
 }> {
   try {       //run local http://127.0.0.1:8080
-    const response = await fetch(`http://nodeserver:8080/queries/${queryId}`, {
+    const response = await fetch(`${backendUrl}/queries/${queryId}`, {
       method: 'DELETE',
     })
 
