@@ -6,3 +6,4 @@ node_modules/
 prisma/dbml
 dist/
 test/cypress/reports/
+test/cypress/screenshots/

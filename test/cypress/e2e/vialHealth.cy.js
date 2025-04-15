@@ -12,6 +12,10 @@ describe(`Validate the vial health page`, () => {
         homePage.openPage();
     });
 
+    afterEach(() => {
+        cy.screenshot();
+    });
+
 
     it("validate that all web elements load on the page", () => {
         cy.title().should("eq", tableData.tabTitle);
@@ -48,6 +52,7 @@ describe(`Validate the vial health page`, () => {
         homePage.vialhealthModalWebElements.modalTitle().should('contain',question);
         homePage.vialhealthModalWebElements.modalDescription().type(query)
         homePage.vialhealthModalWebElements.modalButton().click();
+        cy.screenshot();
 
         cy.wait("@createRequest").then((resp) => {
             expect(resp.response.statusCode).to.equal(200);
@@ -73,11 +78,12 @@ describe(`Validate the vial health page`, () => {
             expect(questionData.query).to.have.property("title", question);
             expect(questionData.query).to.have.property("description", query);
             expect(questionData.query).to.have.property("status", "OPEN");  
-        })
+        })        
 
         cy.getIconForQuestion(homePage.vialHealthTableWebElements.table, question).should('have.attr', 'stroke', 'red').find('path').should('have.length', 2);
         cy.getIconForQuestion(homePage.vialHealthTableWebElements.table, question).trigger('mouseover');
         cy.getIconForQuestion(homePage.vialHealthTableWebElements.table, question).find('title').should('contain', tableData.toolTip.open);
+        cy.getIconForQuestion(homePage.vialHealthTableWebElements.table, question).click();
     
     })
 
@@ -99,6 +105,7 @@ describe(`Validate the vial health page`, () => {
         homePage.vialhealthModalWebElements.modalTitle().should('contain',question);
         homePage.vialhealthModalWebElements.modalDescription().type(query)
         homePage.vialhealthModalWebElements.modalButton().click();
+        cy.screenshot();
 
         cy.wait("@createRequest").then((resp) => {
             expect(resp.response.statusCode).to.equal(200);
@@ -178,6 +185,7 @@ describe(`Validate the vial health page`, () => {
          
         
         homePage.vialhealthModalWebElements.modalResolveButton().click();
+        cy.screenshot();
 
         cy.wait("@resolveRequest").then((put) => {
             expect(put.response.statusCode).to.equal(200);
@@ -191,6 +199,7 @@ describe(`Validate the vial health page`, () => {
             expect(put.response.body).to.have.property("message", "success");
         });
     }) 
+    
         cy.getIconForQuestion(homePage.vialHealthTableWebElements.table, question).should('have.attr', 'stroke', 'green').find('path').should('have.length', 1);
         cy.getIconForQuestion(homePage.vialHealthTableWebElements.table, question).click();
         homePage.vialhealthModalWebElements.modalDeleteButton().click();
