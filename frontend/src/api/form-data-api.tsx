@@ -1,7 +1,8 @@
 import { ICountedFormData } from '@/utils/types'
 
 const isDocker = typeof window !== 'undefined' && window.location.hostname !== 'localhost'
-const backendUrl = isDocker ? 'http://nodeserver:8080' : 'http://127.0.0.1:8080'
+const backendUrl = isDocker ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_PUBLIC_API_URL_LOCAL;
+
 
 export async function GetFormData(): Promise<{
   success: boolean
