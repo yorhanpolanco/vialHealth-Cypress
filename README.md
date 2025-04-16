@@ -19,9 +19,17 @@ To run the application using Docker Compose, follow these steps:
 
    This command will build the Docker images and start the containers as defined in the `docker-compose.yml` file.
 
-5. **Access the Application**: Once the containers are up and running, you can access the application in your web browser at `http://localhost:3000` (or the port specified in your `docker-compose.yml` file).
+5. **Build and Run the Containers with tests**: Use Docker Compose to build and run the containers.
 
-6. **Stopping the Containers**: To stop the running containers, use the following command:
+   ```sh
+   docker-compose --profile test up --build
+   ```
+
+   This command will build the Docker images and start the containers as defined in the `docker-compose.yml` file  and will run the tests that are already automated in Cypress 
+
+6. **Access the Application**: Once the containers are up and running, you can access the application in your web browser at `http://localhost:3000` (or the port specified in your `docker-compose.yml` file).
+
+7. **Stopping the Containers**: To stop the running containers, use the following command:
 
    ```sh
    docker-compose down
@@ -29,7 +37,7 @@ To run the application using Docker Compose, follow these steps:
 
    This will stop and remove the containers, networks, and volumes created by Docker Compose.
 
-7. **Additional Commands**: You can also use other Docker Compose commands as needed, such as:
+8. **Additional Commands**: You can also use other Docker Compose commands as needed, such as:
 
    - `docker-compose logs` to view the logs of the running containers.
    - `docker-compose exec <service_name> <command>` to execute a command in a running container.
